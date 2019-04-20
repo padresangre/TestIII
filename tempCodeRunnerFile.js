@@ -1,6 +1,2 @@
-var persone={
-    name:'John',
-    age:25,
-    isMaried:false
-};
-console.log('\n'+persone.name);
+var budjet =prompt("Введите обязательную статью расходов в этом месяце",'');
+var time=prompt('Введите текущею дату в формате YYYY-MM-DD','');
