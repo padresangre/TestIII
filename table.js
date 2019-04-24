@@ -1,25 +1,49 @@
 'use strict';
-document.body.style.backgroundColor='#ccc';    
-let month=30;
-var money =prompt("Ваш бюджет на месяц?",'');
-document.getElementById('budjet').innerHTML= money;
-var time=prompt('Введите текущею дату в формате YYYY-MM-DD','');
-var appData={
-    budjet:money,
-    timeData:time,
-    Expens:{},
-    optionalExpens:{},
-    income:[],
-    saving:false
+document.body.style.backgroundColor = '#ccc';
+let month = 30;
+var money = +prompt("Ваш бюджет на месяц?", '');
+var time = prompt('Введите текущею дату в формате YYYY-MM-DD', '');
+var appData = {
+    budjet: money,
+    timeData: time,
+    Expens: {},
+    optionalExpens: {},
+    income: [],
+    saving: false
 };
-var q1=prompt('Введите обязательную статью расходов в этом месяце', ''),
-a1=prompt('сколько стоит единица ', ''),
-q2=prompt('Введите обязательную статью расходов в этом месяце', ''),
-a2=prompt('сколько стоит еденица ','');
-appData.Expens.q1=a1;
-appData.Expens.q2=a2;
-var ras=parseInt(appData.Expens.q1)+parseInt(appData.Expens.q2)
-document.getElementById('rashody').innerHTML=ras;
-document.getElementById('exspToMonth').innerHTML=ras*month;
+for (let i = 0; i < 100; i++) {
+    if (q !== 'stop') {
+        var q = prompt('Введите обязательную статью расходов в этом месяце', ''),
+            a = +prompt('сколько стоит  ', '');
+        if (typeof (q) === 'string' && typeof (q) != null && typeof (a) != null && q != "" && a != "" && q.length < 50) {
+            console.log('Done');
+            appData.Expens[q] = a;
+        } else {
+            console.log('не верный формат');
+            i--;
+        }
+    } else {
+        break;
+    }
+}
+appData.moneyPerDay = appData.budjet / month;
+console.log(appData.moneyPerDay);
+if (appData.moneyPerDay < 200) {
+    console.log('Совсем мало');
+} else if (appData.moneyPerDay > 200 && appData.moneyPerDay < 2000) {
+    console.log('Нормально, пойдёт');
+} else if (appData.moneyPerDay > 2000) {
+    console.log('Ваще отлично');
+}
+console.log(parseFloat(appData.Expens.s + appData.Expens.perekus));
+appData.expensForDey = expFD();
+console.log('ваш лмит на день ' + appData.moneyPerDay + ' денег');
+console.log('сСумма расходов на день'+appData.expensForDey);
 console.log(appData);
-console.log(ras*month);
+function expFD(appData) {
+    var ssum=0;
+    for (var i = 0; i < appData.Expens.length; i++) {
+        ssum +=appData.Expens[i]/month;
+    }
+    return ssum;
+}

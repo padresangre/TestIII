@@ -1,2 +1,7 @@
-var budjet =prompt("Введите обязательную статью расходов в этом месяце",'');
-var time=prompt('Введите текущею дату в формате YYYY-MM-DD','');
+function expFD(appData) {
+    var ssum=0;
+    for (var i = 0; i < appData.Expens.length; i++) {
+        ssum +=appData.Expens[i]/month;
+    }
+    return ssum;
+}
